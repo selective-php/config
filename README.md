@@ -138,7 +138,7 @@ The consumer class:
 ```php
 <?php
 
-namespace Domain\User\Service;
+namespace App\Domain\User\Service;
 
 use Selective\Config\Configuration;
 
