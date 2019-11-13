@@ -293,5 +293,4 @@ final class Configuration
     {
         return $this->data;
     }
-
 }
