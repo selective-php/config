@@ -20,7 +20,7 @@ A strictly typed configuration component for PHP. Inspired by [Apache Commons Co
 composer require selective/config
 ```
 
-## Usage
+## Theory of Operation
 
 You can use the `Configuration` to read single values from a multidimensional 
 array by passing the path to one of the `get{type}()` and `find{type}()` methods. 
@@ -33,6 +33,8 @@ If the default value is not given and the element cannot be found, an exception 
 
 A `find*()` method returns only the declared return type or `null`. 
 No exception is thrown if the element cannot be found.
+
+## Usage
 
 ```php
 <?php
