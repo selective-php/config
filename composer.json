@@ -14,7 +14,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.0",
-        "cakephp/chronos": "^1.2"
+        "cakephp/chronos": "^1.2|^2.0"
     },
     "require-dev": {
         "overtrue/phplint": "^1.1",
