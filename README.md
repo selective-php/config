@@ -64,7 +64,7 @@ use Selective\Config\Configuration;
 
 return [
     // Application settings
-    Configuration::class => static function () {
+    Configuration::class => function () {
         return new Configuration(require __DIR__ . '/settings.php');
     },
     
