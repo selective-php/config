@@ -163,7 +163,7 @@ final class Foo
 
 ## Similar libraries
 
-* https://github.com/zendframework/zend-config
+* https://github.com/laminas/laminas-config
 * https://github.com/hassankhan/config
 
 ## License
