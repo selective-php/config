@@ -11,14 +11,14 @@ use InvalidArgumentException;
 final class Configuration
 {
     /**
-     * @var array The data
+     * @var array<mixed> The data
      */
     private $data;
 
     /**
      * Constructor.
      *
-     * @param array $data Data
+     * @param array<mixed> $data Data
      */
     public function __construct(array $data = [])
     {
@@ -109,11 +109,11 @@ final class Configuration
      * Get value as array.
      *
      * @param string $key The key
-     * @param array|null $default The default value
+     * @param array<mixed>|null $default The default value
      *
      * @throws InvalidArgumentException
      *
-     * @return array The value
+     * @return array<mixed> The value
      */
     public function getArray(string $key, array $default = null): array
     {
@@ -130,9 +130,9 @@ final class Configuration
      * Get value as array or null.
      *
      * @param string $key The key
-     * @param array $default The default value
+     * @param array<mixed> $default The default value
      *
-     * @return array|null The value
+     * @return array<mixed>|null The value
      */
     public function findArray(string $key, array $default = null)
     {
@@ -283,6 +283,14 @@ final class Configuration
      */
     public function find(string $path, $default = null)
     {
+        if (array_key_exists($path, $this->data)) {
+            return $this->data[$path] ?? $default;
+        }
+
+        if (strpos($path, '.') === false) {
+            return $default;
+        }
+
         $pathKeys = explode('.', $path);
 
         $arrayCopyOrValue = $this->data;
@@ -300,7 +308,7 @@ final class Configuration
     /**
      * Return all settings as array.
      *
-     * @return array The data
+     * @return array<mixed> The data
      */
     public function all(): array
     {
