@@ -3,7 +3,6 @@
 namespace Selective\Config;
 
 use Cake\Chronos\Chronos;
-use Exception;
 use InvalidArgumentException;
 
 /**
@@ -32,13 +31,15 @@ final class Configuration
      * @param string $key The key
      * @param int|null $default The default value
      *
+     * @throws InvalidArgumentException
+     *
      * @return int The value
      */
     public function getInt(string $key, int $default = null): int
     {
         $value = $this->find($key, $default);
 
-        if ($value === null) {
+        if ($this->isNullOrBlank($value)) {
             throw new InvalidArgumentException(sprintf('No value found for key "%s"', $key));
         }
 
@@ -49,19 +50,19 @@ final class Configuration
      * Get value as integer or null.
      *
      * @param string $key The key
-     * @param int $default The default value
+     * @param int|null $default The default value
      *
      * @return int|null The value
      */
     public function findInt(string $key, int $default = null)
     {
-        $result = $this->find($key, $default);
+        $value = $this->find($key, $default);
 
-        if ($result === null) {
+        if ($this->isNullOrBlank($value)) {
             return null;
         }
 
-        return (int)$result;
+        return (int)$value;
     }
 
     /**
@@ -69,6 +70,8 @@ final class Configuration
      *
      * @param string $key The key
      * @param string|null $default The default value
+     *
+     * @throws InvalidArgumentException
      *
      * @return string The value
      */
@@ -108,13 +111,15 @@ final class Configuration
      * @param string $key The key
      * @param array|null $default The default value
      *
+     * @throws InvalidArgumentException
+     *
      * @return array The value
      */
     public function getArray(string $key, array $default = null): array
     {
         $value = $this->find($key, $default);
 
-        if ($value === null) {
+        if ($this->isNullOrBlank($value)) {
             throw new InvalidArgumentException(sprintf('No value found for key "%s"', $key));
         }
 
@@ -133,7 +138,7 @@ final class Configuration
     {
         $value = $this->find($key, $default);
 
-        if ($value === null) {
+        if ($this->isNullOrBlank($value)) {
             return null;
         }
 
@@ -146,13 +151,15 @@ final class Configuration
      * @param string $key The key
      * @param float|null $default The default value
      *
+     * @throws InvalidArgumentException
+     *
      * @return float The value
      */
     public function getFloat(string $key, float $default = null): float
     {
         $value = $this->find($key, $default);
 
-        if ($value === null) {
+        if ($this->isNullOrBlank($value)) {
             throw new InvalidArgumentException(sprintf('No value found for key "%s"', $key));
         }
 
@@ -171,7 +178,7 @@ final class Configuration
     {
         $value = $this->find($key, $default);
 
-        if ($value === null) {
+        if ($this->isNullOrBlank($value)) {
             return null;
         }
 
@@ -184,13 +191,15 @@ final class Configuration
      * @param string $key The key
      * @param bool|null $default The default value
      *
+     * @throws InvalidArgumentException
+     *
      * @return bool The value
      */
     public function getBool(string $key, bool $default = null): bool
     {
         $value = $this->find($key, $default);
 
-        if ($value === null) {
+        if ($this->isNullOrBlank($value)) {
             throw new InvalidArgumentException(sprintf('No value found for key "%s"', $key));
         }
 
@@ -209,7 +218,7 @@ final class Configuration
     {
         $value = $this->find($key, $default);
 
-        if ($value === null) {
+        if ($this->isNullOrBlank($value)) {
             return null;
         }
 
@@ -222,13 +231,15 @@ final class Configuration
      * @param string $key The key
      * @param Chronos|null $default The default value
      *
+     * @throws InvalidArgumentException
+     *
      * @return Chronos The value
      */
     public function getChronos(string $key, Chronos $default = null): Chronos
     {
         $value = $this->find($key, $default);
 
-        if ($value === null) {
+        if ($this->isNullOrBlank($value)) {
             throw new InvalidArgumentException(sprintf('No value found for key "%s"', $key));
         }
 
@@ -245,15 +256,17 @@ final class Configuration
      * @param string $key The key
      * @param Chronos $default The default value
      *
-     * @throws Exception Chronos date time parsing error
-     *
      * @return Chronos|null The value
      */
     public function findChronos(string $key, Chronos $default = null)
     {
         $value = $this->find($key, $default);
 
-        if ($value === null || $value instanceof Chronos) {
+        if ($this->isNullOrBlank($value)) {
+            return null;
+        }
+
+        if ($value instanceof Chronos) {
             return $value;
         }
 
@@ -285,12 +298,24 @@ final class Configuration
     }
 
     /**
-     * Return all data as array.
+     * Return all settings as array.
      *
      * @return array The data
      */
     public function all(): array
     {
         return $this->data;
+    }
+
+    /**
+     * Is null or blank.
+     *
+     * @param mixed $value The value
+     *
+     * @return bool The status
+     */
+    private function isNullOrBlank($value): bool
+    {
+        return $value === null || $value === '';
     }
 }
