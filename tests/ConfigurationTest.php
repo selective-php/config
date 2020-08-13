@@ -115,4 +115,109 @@ class ConfigurationTest extends TestCase
             [['key' => ['key2' => 'value']], 'key.nope', 'default', 'default'],
         ];
     }
+
+    /**
+     * Test.
+     *
+     * @dataProvider providerGetInt
+     *
+     * @param mixed $data The data
+     * @param string $key The lookup key
+     * @param mixed $default The default value
+     * @param mixed $expected The expected value
+     *
+     * @return void
+     */
+    public function testGetInt($data, string $key, $default, $expected)
+    {
+        $reader = new Configuration($data);
+        static::assertSame($expected, $reader->findInt($key, $default));
+        static::assertSame($expected, $reader->getInt($key, $default));
+    }
+
+    /**
+     * Provider.
+     *
+     * @return array[] The test data
+     */
+    public function providerGetInt(): array
+    {
+        return [
+            [['key' => 123456], 'key', null, 123456],
+            [['key' => null], 'key', 12345, 12345],
+            [['key' => 123456], 'nope', 12345, 12345],
+            [['key' => ['key2' => 123456]], 'key.key2', null, 123456],
+            [['key' => ['key2' => 123456]], 'key.nope', 12345, 12345],
+        ];
+    }
+
+    /**
+     * Test.
+     *
+     * @dataProvider providerGetIntError
+     *
+     * @param mixed $data The data
+     * @param string $key The lookup key
+     *
+     * @return void
+     */
+    public function testGetIntError($data, string $key)
+    {
+        $this->expectException(InvalidArgumentException::class);
+
+        $reader = new Configuration($data);
+        $reader->getInt($key);
+
+        static::assertTrue(true);
+    }
+
+    /**
+     * Provider.
+     *
+     * @return array[] The test data
+     */
+    public function providerGetIntError(): array
+    {
+        return [
+            [['key' => 123456], 'nope'],
+            [['key' => null], 'nope'],
+            [['key' => ['key2' => 123456]], 'key.nope'],
+            [['key' => ['key2' => null]], 'key.key2'],
+        ];
+    }
+
+    /**
+     * Test.
+     *
+     * @dataProvider providerFindInt
+     *
+     * @param mixed $data The data
+     * @param string $key The lookup key
+     * @param mixed $default The default value
+     * @param mixed $expected The expected value
+     *
+     * @return void
+     */
+    public function testFindInt($data, string $key, $default, $expected)
+    {
+        $reader = new Configuration($data);
+        static::assertSame($expected, $reader->findInt($key, $default));
+    }
+
+    /**
+     * Provider.
+     *
+     * @return array[] The test data
+     */
+    public function providerFindInt(): array
+    {
+        return [
+            [['key' => 123456], 'key', null, 123456],
+            [['key' => null], 'key', 12345, 12345],
+            [['key' => null], 'key', null, null],
+            [['key' => 123456], 'nope', 12345, 12345],
+            [['key' => ['key2' => 123456]], 'key.key2', null, 123456],
+            [['key' => ['key2' => 123456]], 'key.nope', 12345, 12345],
+        ];
+    }
 }
