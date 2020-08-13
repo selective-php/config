@@ -220,4 +220,109 @@ class ConfigurationTest extends TestCase
             [['key' => ['key2' => 123456]], 'key.nope', 12345, 12345],
         ];
     }
+
+    /**
+     * Test.
+     *
+     * @dataProvider providerGetBool
+     *
+     * @param mixed $data The data
+     * @param string $key The lookup key
+     * @param mixed $default The default value
+     * @param mixed $expected The expected value
+     *
+     * @return void
+     */
+    public function testGetBool($data, string $key, $default, $expected)
+    {
+        $reader = new Configuration($data);
+        static::assertSame($expected, $reader->findBool($key, $default));
+        static::assertSame($expected, $reader->getBool($key, $default));
+    }
+
+    /**
+     * Provider.
+     *
+     * @return array[] The test data
+     */
+    public function providerGetBool(): array
+    {
+        return [
+            [['key' => true], 'key', null, true],
+            [['key' => null], 'key', false, false],
+            [['key' => true], 'nope', false, false],
+            [['key' => ['key2' => true]], 'key.key2', null, true],
+            [['key' => ['key2' => true]], 'key.nope', false, false],
+        ];
+    }
+
+    /**
+     * Test.
+     *
+     * @dataProvider providerGetBoolError
+     *
+     * @param mixed $data The data
+     * @param string $key The lookup key
+     *
+     * @return void
+     */
+    public function testGetBoolError($data, string $key)
+    {
+        $this->expectException(InvalidArgumentException::class);
+
+        $reader = new Configuration($data);
+        $reader->getBool($key);
+
+        static::assertTrue(true);
+    }
+
+    /**
+     * Provider.
+     *
+     * @return array[] The test data
+     */
+    public function providerGetBoolError(): array
+    {
+        return [
+            [['key' => true], 'nope'],
+            [['key' => null], 'nope'],
+            [['key' => ['key2' => true]], 'key.nope'],
+            [['key' => ['key2' => null]], 'key.key2'],
+        ];
+    }
+
+    /**
+     * Test.
+     *
+     * @dataProvider providerFindBool
+     *
+     * @param mixed $data The data
+     * @param string $key The lookup key
+     * @param mixed $default The default value
+     * @param mixed $expected The expected value
+     *
+     * @return void
+     */
+    public function testFindBool($data, string $key, $default, $expected)
+    {
+        $reader = new Configuration($data);
+        static::assertSame($expected, $reader->findBool($key, $default));
+    }
+
+    /**
+     * Provider.
+     *
+     * @return array[] The test data
+     */
+    public function providerFindBool(): array
+    {
+        return [
+            [['key' => true], 'key', null, true],
+            [['key' => null], 'key', false, false],
+            [['key' => null], 'key', null, null],
+            [['key' => true], 'nope', false, false],
+            [['key' => ['key2' => true]], 'key.key2', null, true],
+            [['key' => ['key2' => true]], 'key.nope', false, false],
+        ];
+    }
 }
