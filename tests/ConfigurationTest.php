@@ -430,4 +430,109 @@ class ConfigurationTest extends TestCase
             [['key' => ['key2' => 123.456]], 'key.nope', 123.45, 123.45],
         ];
     }
+
+    /**
+     * Test.
+     *
+     * @dataProvider providerGetArray
+     *
+     * @param mixed $data The data
+     * @param string $key The lookup key
+     * @param mixed $default The default value
+     * @param mixed $expected The expected value
+     *
+     * @return void
+     */
+    public function testGetArray($data, string $key, $default, $expected)
+    {
+        $reader = new Configuration($data);
+        static::assertSame($expected, $reader->findArray($key, $default));
+        static::assertSame($expected, $reader->getArray($key, $default));
+    }
+
+    /**
+     * Provider.
+     *
+     * @return array[] The test data
+     */
+    public function providerGetArray(): array
+    {
+        return [
+            [['key' => ['key' => 'value']], 'key', null, ['key' => 'value']],
+            [['key' => null], 'key', ['key' => 'val'], ['key' => 'val']],
+            [['key' => ['key' => 'value']], 'nope', ['key' => 'val'], ['key' => 'val']],
+            [['key' => ['key2' => ['key' => 'value']]], 'key.key2', null, ['key' => 'value']],
+            [['key' => ['key2' => ['key' => 'value']]], 'key.nope', ['key' => 'val'], ['key' => 'val']],
+        ];
+    }
+
+    /**
+     * Test.
+     *
+     * @dataProvider providerGetArrayError
+     *
+     * @param mixed $data The data
+     * @param string $key The lookup key
+     *
+     * @return void
+     */
+    public function testGetArrayError($data, string $key)
+    {
+        $this->expectException(InvalidArgumentException::class);
+
+        $reader = new Configuration($data);
+        $reader->getArray($key);
+
+        static::assertTrue(true);
+    }
+
+    /**
+     * Provider.
+     *
+     * @return array[] The test data
+     */
+    public function providerGetArrayError(): array
+    {
+        return [
+            [['key' => ['key' => 'value']], 'nope'],
+            [['key' => null], 'nope'],
+            [['key' => ['key2' => ['key' => 'value']]], 'key.nope'],
+            [['key' => ['key2' => null]], 'key.key2'],
+        ];
+    }
+
+    /**
+     * Test.
+     *
+     * @dataProvider providerFindArray
+     *
+     * @param mixed $data The data
+     * @param string $key The lookup key
+     * @param mixed $default The default value
+     * @param mixed $expected The expected value
+     *
+     * @return void
+     */
+    public function testFindArray($data, string $key, $default, $expected)
+    {
+        $reader = new Configuration($data);
+        static::assertSame($expected, $reader->findArray($key, $default));
+    }
+
+    /**
+     * Provider.
+     *
+     * @return array[] The test data
+     */
+    public function providerFindArray(): array
+    {
+        return [
+            [['key' => ['key' => 'value']], 'key', null, ['key' => 'value']],
+            [['key' => null], 'key', ['key' => 'val'], ['key' => 'val']],
+            [['key' => null], 'key', null, null],
+            [['key' => ['key' => 'value']], 'nope', ['key' => 'val'], ['key' => 'val']],
+            [['key' => ['key2' => ['key' => 'value']]], 'key.key2', null, ['key' => 'value']],
+            [['key' => ['key2' => ['key' => 'value']]], 'key.nope', ['key' => 'val'], ['key' => 'val']],
+        ];
+    }
 }
