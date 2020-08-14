@@ -4,6 +4,7 @@ namespace Selective\Config\Test;
 
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
+use Cake\Chronos\Chronos;
 use Selective\Config\Configuration;
 
 /**
@@ -533,6 +534,111 @@ class ConfigurationTest extends TestCase
             [['key' => ['key' => 'value']], 'nope', ['key' => 'val'], ['key' => 'val']],
             [['key' => ['key2' => ['key' => 'value']]], 'key.key2', null, ['key' => 'value']],
             [['key' => ['key2' => ['key' => 'value']]], 'key.nope', ['key' => 'val'], ['key' => 'val']],
+        ];
+    }
+
+    /**
+     * Test.
+     *
+     * @dataProvider providerGetChronos
+     *
+     * @param mixed $data The data
+     * @param string $key The lookup key
+     * @param mixed $default The default value
+     * @param mixed $expected The expected value
+     *
+     * @return void
+     */
+    public function testGetChronos($data, string $key, $default, $expected)
+    {
+        $reader = new Configuration($data);
+        static::assertSame((string)$expected, (string)$reader->findChronos($key, $default));
+        static::assertSame((string)$expected, (string)$reader->getChronos($key, $default));
+    }
+
+    /**
+     * Provider.
+     *
+     * @return array[] The test data
+     */
+    public function providerGetChronos(): array
+    {
+        return [
+            [['key' => Chronos::now()], 'key', null, Chronos::now()],
+            [['key' => null], 'key', Chronos::yesterday(), Chronos::yesterday()],
+            [['key' => Chronos::now()], 'nope', Chronos::yesterday(), Chronos::yesterday()],
+            [['key' => ['key2' => Chronos::now()]], 'key.key2', null, Chronos::now()],
+            [['key' => ['key2' => Chronos::now()]], 'key.nope', Chronos::yesterday(), Chronos::yesterday()],
+        ];
+    }
+
+    /**
+     * Test.
+     *
+     * @dataProvider providerGetChronosError
+     *
+     * @param mixed $data The data
+     * @param string $key The lookup key
+     *
+     * @return void
+     */
+    public function testGetChronosError($data, string $key)
+    {
+        $this->expectException(InvalidArgumentException::class);
+
+        $reader = new Configuration($data);
+        $reader->getChronos($key);
+
+        static::assertTrue(true);
+    }
+
+    /**
+     * Provider.
+     *
+     * @return array[] The test data
+     */
+    public function providerGetChronosError(): array
+    {
+        return [
+            [['key' => Chronos::now()], 'nope'],
+            [['key' => null], 'nope'],
+            [['key' => ['key2' => Chronos::now()]], 'key.nope'],
+            [['key' => ['key2' => null]], 'key.key2'],
+        ];
+    }
+
+    /**
+     * Test.
+     *
+     * @dataProvider providerFindChronos
+     *
+     * @param mixed $data The data
+     * @param string $key The lookup key
+     * @param mixed $default The default value
+     * @param mixed $expected The expected value
+     *
+     * @return void
+     */
+    public function testFindChronos($data, string $key, $default, $expected)
+    {
+        $reader = new Configuration($data);
+        static::assertSame((string)$expected, (string)$reader->findChronos($key, $default));
+    }
+
+    /**
+     * Provider.
+     *
+     * @return array[] The test data
+     */
+    public function providerFindChronos(): array
+    {
+        return [
+            [['key' => Chronos::now()], 'key', null, Chronos::now()],
+            [['key' => null], 'key', Chronos::yesterday(), Chronos::yesterday()],
+            [['key' => null], 'key', null, null],
+            [['key' => Chronos::now()], 'nope', Chronos::yesterday(), Chronos::yesterday()],
+            [['key' => ['key2' => Chronos::now()]], 'key.key2', null, Chronos::now()],
+            [['key' => ['key2' => Chronos::now()]], 'key.nope', Chronos::yesterday(), Chronos::yesterday()],
         ];
     }
 }
