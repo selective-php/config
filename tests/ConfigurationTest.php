@@ -565,6 +565,7 @@ class ConfigurationTest extends TestCase
     {
         return [
             [['key' => Chronos::now()], 'key', null, Chronos::now()],
+            [['key' => '2020-08-15'], 'key', null, '2020-08-15 00:00:00'],
             [['key' => null], 'key', Chronos::yesterday(), Chronos::yesterday()],
             [['key' => Chronos::now()], 'nope', Chronos::yesterday(), Chronos::yesterday()],
             [['key' => ['key2' => Chronos::now()]], 'key.key2', null, Chronos::now()],
@@ -634,6 +635,7 @@ class ConfigurationTest extends TestCase
     {
         return [
             [['key' => Chronos::now()], 'key', null, Chronos::now()],
+            [['key' => '2020-08-15'], 'key', null, '2020-08-15 00:00:00'],
             [['key' => null], 'key', Chronos::yesterday(), Chronos::yesterday()],
             [['key' => null], 'key', null, null],
             [['key' => Chronos::now()], 'nope', Chronos::yesterday(), Chronos::yesterday()],
