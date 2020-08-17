@@ -643,4 +643,39 @@ class ConfigurationTest extends TestCase
             [['key' => ['key2' => Chronos::now()]], 'key.nope', Chronos::yesterday(), Chronos::yesterday()],
         ];
     }
+
+    /**
+     * Provider
+     *
+     * @return array[] The test data
+     */
+    public function providerAll(): array
+    {
+        return [
+            [['key' => Chronos::now()]],
+            [['key' => '2020-08-15']],
+            [['key' => 123.456]],
+            [['key' => 123]],
+            [['key' => 'value']],
+            [['key' => true]],
+            [['key' => false]],
+            [['key' => null]],
+        ];
+    }
+
+    /**
+     * Test
+     *
+     * @dataProvider providerAll
+     *
+     * @param mixed $data The data
+     *
+     * @return void
+     */
+    public function testAll($data): void
+    {
+        $reader = new Configuration($data);
+
+        static::assertSame($data, $reader->all());
+    }
 }
