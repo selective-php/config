@@ -29,7 +29,7 @@ build:
                     - php-scrutinizer-run
     dependencies:
         before:
-            - composer self-update --2
+            - sudo composer self-update --2
             - composer update --no-interaction --prefer-dist --no-progress
     tests:
         before:
