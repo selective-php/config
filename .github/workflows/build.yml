@@ -1,14 +1,14 @@
 name: PHP
 
-on: [push, pull_request]
+on: [ push, pull_request ]
 
 jobs:
   run:
     runs-on: ${{ matrix.operating-system }}
     strategy:
       matrix:
-        operating-system: [ubuntu-latest]
-        php-versions: ['7.2', '7.3', '7.4', '8.0']
+        operating-system: [ ubuntu-latest ]
+        php-versions: [ '7.2', '7.3', '7.4', '8.0' ]
     name: PHP ${{ matrix.php-versions }} Test on ${{ matrix.operating-system }}
 
     steps:
@@ -34,8 +34,15 @@ jobs:
       - name: Validate composer.json and composer.lock
         run: composer validate
 
-      - name: Install dependencies
-        run: composer install --prefer-dist --no-progress --no-suggest
+      - name: Install dependencies for PHP 7
+        run: composer update --prefer-dist --no-progress
+        with:
+          php-version: [ '7.2', '7.3', '7.4' ]
+
+      - name: Install dependencies for PHP 8
+        run: composer update --prefer-dist --no-progress --ignore-platform-reqs
+        with:
+          php-version: [ '8.0' ]
 
       - name: Run test suite
         run: composer check
