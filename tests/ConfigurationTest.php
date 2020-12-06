@@ -664,7 +664,7 @@ class ConfigurationTest extends TestCase
     }
 
     /**
-     * Test
+     * Test.
      *
      * @dataProvider providerAll
      *
