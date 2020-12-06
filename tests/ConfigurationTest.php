@@ -2,9 +2,9 @@
 
 namespace Selective\Config\Test;
 
+use Cake\Chronos\Chronos;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
-use Cake\Chronos\Chronos;
 use Selective\Config\Configuration;
 
 /**
@@ -24,11 +24,11 @@ class ConfigurationTest extends TestCase
      *
      * @return void
      */
-    public function testGetString($data, string $key, $default, $expected)
+    public function testGetString($data, string $key, $default, $expected): void
     {
         $reader = new Configuration($data);
-        static::assertSame($expected, $reader->findString($key, $default));
-        static::assertSame($expected, $reader->getString($key, $default));
+        $this->assertSame($expected, $reader->findString($key, $default));
+        $this->assertSame($expected, $reader->getString($key, $default));
     }
 
     /**
@@ -57,14 +57,14 @@ class ConfigurationTest extends TestCase
      *
      * @return void
      */
-    public function testGetStringError($data, string $key)
+    public function testGetStringError($data, string $key): void
     {
         $this->expectException(InvalidArgumentException::class);
 
         $reader = new Configuration($data);
         $reader->getString($key);
 
-        static::assertTrue(true);
+        $this->assertTrue(true);
     }
 
     /**
@@ -94,10 +94,10 @@ class ConfigurationTest extends TestCase
      *
      * @return void
      */
-    public function testFindString($data, string $key, $default, $expected)
+    public function testFindString($data, string $key, $default, $expected): void
     {
         $reader = new Configuration($data);
-        static::assertSame($expected, $reader->findString($key, $default));
+        $this->assertSame($expected, $reader->findString($key, $default));
     }
 
     /**
@@ -129,11 +129,11 @@ class ConfigurationTest extends TestCase
      *
      * @return void
      */
-    public function testGetInt($data, string $key, $default, $expected)
+    public function testGetInt($data, string $key, $default, $expected): void
     {
         $reader = new Configuration($data);
-        static::assertSame($expected, $reader->findInt($key, $default));
-        static::assertSame($expected, $reader->getInt($key, $default));
+        $this->assertSame($expected, $reader->findInt($key, $default));
+        $this->assertSame($expected, $reader->getInt($key, $default));
     }
 
     /**
@@ -162,14 +162,14 @@ class ConfigurationTest extends TestCase
      *
      * @return void
      */
-    public function testGetIntError($data, string $key)
+    public function testGetIntError($data, string $key): void
     {
         $this->expectException(InvalidArgumentException::class);
 
         $reader = new Configuration($data);
         $reader->getInt($key);
 
-        static::assertTrue(true);
+        $this->assertTrue(true);
     }
 
     /**
@@ -199,10 +199,10 @@ class ConfigurationTest extends TestCase
      *
      * @return void
      */
-    public function testFindInt($data, string $key, $default, $expected)
+    public function testFindInt($data, string $key, $default, $expected): void
     {
         $reader = new Configuration($data);
-        static::assertSame($expected, $reader->findInt($key, $default));
+        $this->assertSame($expected, $reader->findInt($key, $default));
     }
 
     /**
@@ -234,11 +234,11 @@ class ConfigurationTest extends TestCase
      *
      * @return void
      */
-    public function testGetBool($data, string $key, $default, $expected)
+    public function testGetBool($data, string $key, $default, $expected): void
     {
         $reader = new Configuration($data);
-        static::assertSame($expected, $reader->findBool($key, $default));
-        static::assertSame($expected, $reader->getBool($key, $default));
+        $this->assertSame($expected, $reader->findBool($key, $default));
+        $this->assertSame($expected, $reader->getBool($key, $default));
     }
 
     /**
@@ -267,14 +267,14 @@ class ConfigurationTest extends TestCase
      *
      * @return void
      */
-    public function testGetBoolError($data, string $key)
+    public function testGetBoolError($data, string $key): void
     {
         $this->expectException(InvalidArgumentException::class);
 
         $reader = new Configuration($data);
         $reader->getBool($key);
 
-        static::assertTrue(true);
+        $this->assertTrue(true);
     }
 
     /**
@@ -304,10 +304,10 @@ class ConfigurationTest extends TestCase
      *
      * @return void
      */
-    public function testFindBool($data, string $key, $default, $expected)
+    public function testFindBool($data, string $key, $default, $expected): void
     {
         $reader = new Configuration($data);
-        static::assertSame($expected, $reader->findBool($key, $default));
+        $this->assertSame($expected, $reader->findBool($key, $default));
     }
 
     /**
@@ -339,11 +339,11 @@ class ConfigurationTest extends TestCase
      *
      * @return void
      */
-    public function testGetFloat($data, string $key, $default, $expected)
+    public function testGetFloat($data, string $key, $default, $expected): void
     {
         $reader = new Configuration($data);
-        static::assertSame($expected, $reader->findFloat($key, $default));
-        static::assertSame($expected, $reader->getFloat($key, $default));
+        $this->assertSame($expected, $reader->findFloat($key, $default));
+        $this->assertSame($expected, $reader->getFloat($key, $default));
     }
 
     /**
@@ -372,14 +372,14 @@ class ConfigurationTest extends TestCase
      *
      * @return void
      */
-    public function testGetFloatError($data, string $key)
+    public function testGetFloatError($data, string $key): void
     {
         $this->expectException(InvalidArgumentException::class);
 
         $reader = new Configuration($data);
         $reader->getFloat($key);
 
-        static::assertTrue(true);
+        $this->assertTrue(true);
     }
 
     /**
@@ -409,10 +409,10 @@ class ConfigurationTest extends TestCase
      *
      * @return void
      */
-    public function testFindFloat($data, string $key, $default, $expected)
+    public function testFindFloat($data, string $key, $default, $expected): void
     {
         $reader = new Configuration($data);
-        static::assertSame($expected, $reader->findFloat($key, $default));
+        $this->assertSame($expected, $reader->findFloat($key, $default));
     }
 
     /**
@@ -444,11 +444,11 @@ class ConfigurationTest extends TestCase
      *
      * @return void
      */
-    public function testGetArray($data, string $key, $default, $expected)
+    public function testGetArray($data, string $key, $default, $expected): void
     {
         $reader = new Configuration($data);
-        static::assertSame($expected, $reader->findArray($key, $default));
-        static::assertSame($expected, $reader->getArray($key, $default));
+        $this->assertSame($expected, $reader->findArray($key, $default));
+        $this->assertSame($expected, $reader->getArray($key, $default));
     }
 
     /**
@@ -477,14 +477,14 @@ class ConfigurationTest extends TestCase
      *
      * @return void
      */
-    public function testGetArrayError($data, string $key)
+    public function testGetArrayError($data, string $key): void
     {
         $this->expectException(InvalidArgumentException::class);
 
         $reader = new Configuration($data);
         $reader->getArray($key);
 
-        static::assertTrue(true);
+        $this->assertTrue(true);
     }
 
     /**
@@ -514,10 +514,10 @@ class ConfigurationTest extends TestCase
      *
      * @return void
      */
-    public function testFindArray($data, string $key, $default, $expected)
+    public function testFindArray($data, string $key, $default, $expected): void
     {
         $reader = new Configuration($data);
-        static::assertSame($expected, $reader->findArray($key, $default));
+        $this->assertSame($expected, $reader->findArray($key, $default));
     }
 
     /**
@@ -549,11 +549,11 @@ class ConfigurationTest extends TestCase
      *
      * @return void
      */
-    public function testGetChronos($data, string $key, $default, $expected)
+    public function testGetChronos($data, string $key, $default, $expected): void
     {
         $reader = new Configuration($data);
-        static::assertSame((string)$expected, (string)$reader->findChronos($key, $default));
-        static::assertSame((string)$expected, (string)$reader->getChronos($key, $default));
+        $this->assertSame((string)$expected, (string)$reader->findChronos($key, $default));
+        $this->assertSame((string)$expected, (string)$reader->getChronos($key, $default));
     }
 
     /**
@@ -583,14 +583,14 @@ class ConfigurationTest extends TestCase
      *
      * @return void
      */
-    public function testGetChronosError($data, string $key)
+    public function testGetChronosError($data, string $key): void
     {
         $this->expectException(InvalidArgumentException::class);
 
         $reader = new Configuration($data);
         $reader->getChronos($key);
 
-        static::assertTrue(true);
+        $this->assertTrue(true);
     }
 
     /**
@@ -620,10 +620,10 @@ class ConfigurationTest extends TestCase
      *
      * @return void
      */
-    public function testFindChronos($data, string $key, $default, $expected)
+    public function testFindChronos($data, string $key, $default, $expected): void
     {
         $reader = new Configuration($data);
-        static::assertSame((string)$expected, (string)$reader->findChronos($key, $default));
+        $this->assertSame((string)$expected, (string)$reader->findChronos($key, $default));
     }
 
     /**
@@ -645,7 +645,7 @@ class ConfigurationTest extends TestCase
     }
 
     /**
-     * Provider
+     * Provider.
      *
      * @return array[] The test data
      */
@@ -676,6 +676,6 @@ class ConfigurationTest extends TestCase
     {
         $reader = new Configuration($data);
 
-        static::assertSame($data, $reader->all());
+        $this->assertSame($data, $reader->all());
     }
 }
