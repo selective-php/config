@@ -29,8 +29,7 @@ build:
                     - php-scrutinizer-run
     dependencies:
         before:
-            - sudo chmod 777 /usr/bin/composer.phar
-            - composer self-update --2
+            - composer self-update
             - composer update --no-interaction --prefer-dist --no-progress
     tests:
         before:
