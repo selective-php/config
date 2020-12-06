@@ -37,5 +37,8 @@ jobs:
       - name: Install dependencies
         run: composer install --prefer-dist --no-progress --no-suggest --ignore-platform-reqs
 
+      - name: Set CS-Fixer ignore env
+        run: set PHP_CS_FIXER_IGNORE_ENV=1
+
       - name: Run test suite
         run: composer check
