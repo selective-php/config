@@ -34,7 +34,7 @@ class ConfigurationTest extends TestCase
     /**
      * Provider.
      *
-     * @return array[] The test data
+     * @return array<array<mixed>> The test data
      */
     public function providerGetString(): array
     {
@@ -70,7 +70,7 @@ class ConfigurationTest extends TestCase
     /**
      * Provider.
      *
-     * @return array[] The test data
+     * @return array<array<mixed>> The test data
      */
     public function providerGetStringError(): array
     {
@@ -103,7 +103,7 @@ class ConfigurationTest extends TestCase
     /**
      * Provider.
      *
-     * @return array[] The test data
+     * @return array<array<mixed>> The test data
      */
     public function providerFindString(): array
     {
@@ -139,7 +139,7 @@ class ConfigurationTest extends TestCase
     /**
      * Provider.
      *
-     * @return array[] The test data
+     * @return array<array<mixed>> The test data
      */
     public function providerGetInt(): array
     {
@@ -175,7 +175,7 @@ class ConfigurationTest extends TestCase
     /**
      * Provider.
      *
-     * @return array[] The test data
+     * @return array<array<mixed>> The test data
      */
     public function providerGetIntError(): array
     {
@@ -208,7 +208,7 @@ class ConfigurationTest extends TestCase
     /**
      * Provider.
      *
-     * @return array[] The test data
+     * @return array<array<mixed>> The test data
      */
     public function providerFindInt(): array
     {
@@ -244,7 +244,7 @@ class ConfigurationTest extends TestCase
     /**
      * Provider.
      *
-     * @return array[] The test data
+     * @return array<array<mixed>> The test data
      */
     public function providerGetBool(): array
     {
@@ -280,7 +280,7 @@ class ConfigurationTest extends TestCase
     /**
      * Provider.
      *
-     * @return array[] The test data
+     * @return array<array<mixed>> The test data
      */
     public function providerGetBoolError(): array
     {
@@ -313,7 +313,7 @@ class ConfigurationTest extends TestCase
     /**
      * Provider.
      *
-     * @return array[] The test data
+     * @return array<array<mixed>> The test data
      */
     public function providerFindBool(): array
     {
@@ -349,7 +349,7 @@ class ConfigurationTest extends TestCase
     /**
      * Provider.
      *
-     * @return array[] The test data
+     * @return array<array<mixed>> The test data
      */
     public function providerGetFloat(): array
     {
@@ -385,7 +385,7 @@ class ConfigurationTest extends TestCase
     /**
      * Provider.
      *
-     * @return array[] The test data
+     * @return array<array<mixed>> The test data
      */
     public function providerGetFloatError(): array
     {
@@ -418,7 +418,7 @@ class ConfigurationTest extends TestCase
     /**
      * Provider.
      *
-     * @return array[] The test data
+     * @return array<array<mixed>> The test data
      */
     public function providerFindFloat(): array
     {
@@ -454,7 +454,7 @@ class ConfigurationTest extends TestCase
     /**
      * Provider.
      *
-     * @return array[] The test data
+     * @return array<array<mixed>> The test data
      */
     public function providerGetArray(): array
     {
@@ -490,7 +490,7 @@ class ConfigurationTest extends TestCase
     /**
      * Provider.
      *
-     * @return array[] The test data
+     * @return array<array<mixed>> The test data
      */
     public function providerGetArrayError(): array
     {
@@ -523,7 +523,7 @@ class ConfigurationTest extends TestCase
     /**
      * Provider.
      *
-     * @return array[] The test data
+     * @return array<array<mixed>> The test data
      */
     public function providerFindArray(): array
     {
@@ -559,7 +559,7 @@ class ConfigurationTest extends TestCase
     /**
      * Provider.
      *
-     * @return array[] The test data
+     * @return array<array<mixed>> The test data
      */
     public function providerGetChronos(): array
     {
@@ -596,7 +596,7 @@ class ConfigurationTest extends TestCase
     /**
      * Provider.
      *
-     * @return array[] The test data
+     * @return array<array<mixed>> The test data
      */
     public function providerGetChronosError(): array
     {
@@ -629,7 +629,7 @@ class ConfigurationTest extends TestCase
     /**
      * Provider.
      *
-     * @return array[] The test data
+     * @return array<array<mixed>> The test data
      */
     public function providerFindChronos(): array
     {
@@ -647,7 +647,7 @@ class ConfigurationTest extends TestCase
     /**
      * Provider.
      *
-     * @return array[] The test data
+     * @return array<array<mixed>> The test data
      */
     public function providerAll(): array
     {
