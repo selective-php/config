@@ -1,0 +1,22 @@
+parameters:
+	reportUnmatchedIgnoredErrors: false
+	ignoreErrors:
+		- '#Cannot cast mixed to int.#'
+		- '#Cannot cast mixed to string.#'
+		- '#Cannot cast mixed to float.#'
+		- '#Cannot access offset string on mixed.#'
+		- '#Parameter \#1 \$time of class Cake\\Chronos\\Chronos constructor expects DateTimeInterface\|int\|string\|null, mixed given.#'
+		- '#Parameter \#1 \$data of class Selective\\Config\\Configuration constructor expects DateTimeInterface\|int\|string\|null, mixed given.#'
+		- '#Parameter \#1 \$data of class Selective\\Config\\Configuration constructor expects array, mixed given.#'
+		- '#Parameter \#2 \$default of method Selective\\Config\\Configuration::findString\(\) expects string\|null, mixed given.#'
+		- '#Parameter \#2 \$default of method Selective\\Config\\Configuration::getString\(\) expects string\|null, mixed given.#'
+		- '#Parameter \#2 \$default of method Selective\\Config\\Configuration::findInt\(\) expects int\|null, mixed given.#'
+		- '#Parameter \#2 \$default of method Selective\\Config\\Configuration::getInt\(\) expects int\|null, mixed given.#'
+		- '#Parameter \#2 \$default of method Selective\\Config\\Configuration::findBool\(\) expects bool\|null, mixed given.#'
+		- '#Parameter \#2 \$default of method Selective\\Config\\Configuration::getBool\(\) expects bool\|null, mixed given.#'
+		- '#Parameter \#2 \$default of method Selective\\Config\\Configuration::findFloat\(\) expects float\|null, mixed given.#'
+		- '#Parameter \#2 \$default of method Selective\\Config\\Configuration::getFloat\(\) expects float\|null, mixed given.#'
+		- '#Parameter \#2 \$default of method Selective\\Config\\Configuration::findArray\(\) expects array\|null, mixed given.#'
+		- '#Parameter \#2 \$default of method Selective\\Config\\Configuration::getArray\(\) expects array\|null, mixed given.#'
+		- '#Parameter \#2 \$default of method Selective\\Config\\Configuration::findChronos\(\) expects Cake\\Chronos\\Chronos\|null, mixed given.#'
+		- '#Parameter \#2 \$default of method Selective\\Config\\Configuration::getChronos\(\) expects Cake\\Chronos\\Chronos\|null, mixed given.#'
