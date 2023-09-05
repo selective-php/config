@@ -3,7 +3,6 @@
 namespace Selective\Config\Test;
 
 use Cake\Chronos\Chronos;
-use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use Selective\Config\Configuration;
 
@@ -59,7 +58,7 @@ class ConfigurationTest extends TestCase
      */
     public function testGetStringError($data, string $key): void
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(\InvalidArgumentException::class);
 
         $reader = new Configuration($data);
         $reader->getString($key);
@@ -164,7 +163,7 @@ class ConfigurationTest extends TestCase
      */
     public function testGetIntError($data, string $key): void
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(\InvalidArgumentException::class);
 
         $reader = new Configuration($data);
         $reader->getInt($key);
@@ -269,7 +268,7 @@ class ConfigurationTest extends TestCase
      */
     public function testGetBoolError($data, string $key): void
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(\InvalidArgumentException::class);
 
         $reader = new Configuration($data);
         $reader->getBool($key);
@@ -374,7 +373,7 @@ class ConfigurationTest extends TestCase
      */
     public function testGetFloatError($data, string $key): void
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(\InvalidArgumentException::class);
 
         $reader = new Configuration($data);
         $reader->getFloat($key);
@@ -479,7 +478,7 @@ class ConfigurationTest extends TestCase
      */
     public function testGetArrayError($data, string $key): void
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(\InvalidArgumentException::class);
 
         $reader = new Configuration($data);
         $reader->getArray($key);
@@ -585,7 +584,7 @@ class ConfigurationTest extends TestCase
      */
     public function testGetChronosError($data, string $key): void
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(\InvalidArgumentException::class);
 
         $reader = new Configuration($data);
         $reader->getChronos($key);

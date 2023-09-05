@@ -3,7 +3,6 @@
 namespace Selective\Config;
 
 use Cake\Chronos\Chronos;
-use InvalidArgumentException;
 
 /**
  * Configuration.
@@ -31,7 +30,7 @@ final class Configuration
      * @param string $key The key
      * @param int|null $default The default value
      *
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      *
      * @return int The value
      */
@@ -40,7 +39,7 @@ final class Configuration
         $value = $this->find($key, $default);
 
         if ($this->isNullOrBlank($value)) {
-            throw new InvalidArgumentException(sprintf('No value found for key "%s"', $key));
+            throw new \InvalidArgumentException(sprintf('No value found for key "%s"', $key));
         }
 
         return (int)$value;
@@ -71,7 +70,7 @@ final class Configuration
      * @param string $key The key
      * @param string|null $default The default value
      *
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      *
      * @return string The value
      */
@@ -80,7 +79,7 @@ final class Configuration
         $value = $this->find($key, $default);
 
         if ($value === null) {
-            throw new InvalidArgumentException(sprintf('No value found for key "%s"', $key));
+            throw new \InvalidArgumentException(sprintf('No value found for key "%s"', $key));
         }
 
         return (string)$value;
@@ -111,7 +110,7 @@ final class Configuration
      * @param string $key The key
      * @param array<mixed>|null $default The default value
      *
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      *
      * @return array<mixed> The value
      */
@@ -120,7 +119,7 @@ final class Configuration
         $value = $this->find($key, $default);
 
         if ($this->isNullOrBlank($value)) {
-            throw new InvalidArgumentException(sprintf('No value found for key "%s"', $key));
+            throw new \InvalidArgumentException(sprintf('No value found for key "%s"', $key));
         }
 
         return (array)$value;
@@ -151,7 +150,7 @@ final class Configuration
      * @param string $key The key
      * @param float|null $default The default value
      *
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      *
      * @return float The value
      */
@@ -160,7 +159,7 @@ final class Configuration
         $value = $this->find($key, $default);
 
         if ($this->isNullOrBlank($value)) {
-            throw new InvalidArgumentException(sprintf('No value found for key "%s"', $key));
+            throw new \InvalidArgumentException(sprintf('No value found for key "%s"', $key));
         }
 
         return (float)$value;
@@ -191,7 +190,7 @@ final class Configuration
      * @param string $key The key
      * @param bool|null $default The default value
      *
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      *
      * @return bool The value
      */
@@ -200,7 +199,7 @@ final class Configuration
         $value = $this->find($key, $default);
 
         if ($this->isNullOrBlank($value)) {
-            throw new InvalidArgumentException(sprintf('No value found for key "%s"', $key));
+            throw new \InvalidArgumentException(sprintf('No value found for key "%s"', $key));
         }
 
         return (bool)$value;
@@ -231,7 +230,7 @@ final class Configuration
      * @param string $key The key
      * @param Chronos|null $default The default value
      *
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      *
      * @return Chronos The value
      */
@@ -240,7 +239,7 @@ final class Configuration
         $value = $this->find($key, $default);
 
         if ($this->isNullOrBlank($value)) {
-            throw new InvalidArgumentException(sprintf('No value found for key "%s"', $key));
+            throw new \InvalidArgumentException(sprintf('No value found for key "%s"', $key));
         }
 
         if ($value instanceof Chronos) {
