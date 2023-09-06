@@ -12,7 +12,7 @@ A strictly typed configuration component for PHP. Inspired by [Apache Commons Co
 
 ## Requirements
 
-* PHP 7.2+ or 8
+* PHP 8.1+
 
 ## Installation
 

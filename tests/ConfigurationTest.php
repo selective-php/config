@@ -10,7 +10,7 @@ use Selective\Config\Configuration;
 /**
  * Test.
  */
-class ConfigurationTest extends TestCase
+final class ConfigurationTest extends TestCase
 {
     /**
      * Test.
@@ -34,9 +34,9 @@ class ConfigurationTest extends TestCase
     /**
      * Provider.
      *
-     * @return array<array<mixed>> The test data
+     * @return array The test data
      */
-    public function providerGetString(): array
+    public static function providerGetString(): array
     {
         return [
             [['key' => 'value'], 'key', null, 'value'],
@@ -63,16 +63,14 @@ class ConfigurationTest extends TestCase
 
         $reader = new Configuration($data);
         $reader->getString($key);
-
-        $this->assertTrue(true);
     }
 
     /**
      * Provider.
      *
-     * @return array<array<mixed>> The test data
+     * @return array The test data
      */
-    public function providerGetStringError(): array
+    public static function providerGetStringError(): array
     {
         return [
             [['key' => 'value'], 'nope'],
@@ -103,9 +101,9 @@ class ConfigurationTest extends TestCase
     /**
      * Provider.
      *
-     * @return array<array<mixed>> The test data
+     * @return array The test data
      */
-    public function providerFindString(): array
+    public static function providerFindString(): array
     {
         return [
             [['key' => 'value'], 'key', null, 'value'],
@@ -139,9 +137,9 @@ class ConfigurationTest extends TestCase
     /**
      * Provider.
      *
-     * @return array<array<mixed>> The test data
+     * @return array The test data
      */
-    public function providerGetInt(): array
+    public static function providerGetInt(): array
     {
         return [
             [['key' => 123456], 'key', null, 123456],
@@ -175,9 +173,9 @@ class ConfigurationTest extends TestCase
     /**
      * Provider.
      *
-     * @return array<array<mixed>> The test data
+     * @return array The test data
      */
-    public function providerGetIntError(): array
+    public static function providerGetIntError(): array
     {
         return [
             [['key' => 123456], 'nope'],
@@ -208,9 +206,9 @@ class ConfigurationTest extends TestCase
     /**
      * Provider.
      *
-     * @return array<array<mixed>> The test data
+     * @return array The test data
      */
-    public function providerFindInt(): array
+    public static function providerFindInt(): array
     {
         return [
             [['key' => 123456], 'key', null, 123456],
@@ -244,9 +242,9 @@ class ConfigurationTest extends TestCase
     /**
      * Provider.
      *
-     * @return array<array<mixed>> The test data
+     * @return array The test data
      */
-    public function providerGetBool(): array
+    public static function providerGetBool(): array
     {
         return [
             [['key' => true], 'key', null, true],
@@ -280,9 +278,9 @@ class ConfigurationTest extends TestCase
     /**
      * Provider.
      *
-     * @return array<array<mixed>> The test data
+     * @return array The test data
      */
-    public function providerGetBoolError(): array
+    public static function providerGetBoolError(): array
     {
         return [
             [['key' => true], 'nope'],
@@ -313,9 +311,9 @@ class ConfigurationTest extends TestCase
     /**
      * Provider.
      *
-     * @return array<array<mixed>> The test data
+     * @return array The test data
      */
-    public function providerFindBool(): array
+    public static function providerFindBool(): array
     {
         return [
             [['key' => true], 'key', null, true],
@@ -349,9 +347,9 @@ class ConfigurationTest extends TestCase
     /**
      * Provider.
      *
-     * @return array<array<mixed>> The test data
+     * @return array The test data
      */
-    public function providerGetFloat(): array
+    public static function providerGetFloat(): array
     {
         return [
             [['key' => 123.456], 'key', null, 123.456],
@@ -385,9 +383,9 @@ class ConfigurationTest extends TestCase
     /**
      * Provider.
      *
-     * @return array<array<mixed>> The test data
+     * @return array The test data
      */
-    public function providerGetFloatError(): array
+    public static function providerGetFloatError(): array
     {
         return [
             [['key' => 123.456], 'nope'],
@@ -418,9 +416,9 @@ class ConfigurationTest extends TestCase
     /**
      * Provider.
      *
-     * @return array<array<mixed>> The test data
+     * @return array The test data
      */
-    public function providerFindFloat(): array
+    public static function providerFindFloat(): array
     {
         return [
             [['key' => 123.456], 'key', null, 123.456],
@@ -454,9 +452,9 @@ class ConfigurationTest extends TestCase
     /**
      * Provider.
      *
-     * @return array<array<mixed>> The test data
+     * @return array The test data
      */
-    public function providerGetArray(): array
+    public static function providerGetArray(): array
     {
         return [
             [['key' => ['key' => 'value']], 'key', null, ['key' => 'value']],
@@ -490,9 +488,9 @@ class ConfigurationTest extends TestCase
     /**
      * Provider.
      *
-     * @return array<array<mixed>> The test data
+     * @return array The test data
      */
-    public function providerGetArrayError(): array
+    public static function providerGetArrayError(): array
     {
         return [
             [['key' => ['key' => 'value']], 'nope'],
@@ -523,9 +521,9 @@ class ConfigurationTest extends TestCase
     /**
      * Provider.
      *
-     * @return array<array<mixed>> The test data
+     * @return array The test data
      */
-    public function providerFindArray(): array
+    public static function providerFindArray(): array
     {
         return [
             [['key' => ['key' => 'value']], 'key', null, ['key' => 'value']],
@@ -559,9 +557,9 @@ class ConfigurationTest extends TestCase
     /**
      * Provider.
      *
-     * @return array<array<mixed>> The test data
+     * @return array The test data
      */
-    public function providerGetChronos(): array
+    public static function providerGetChronos(): array
     {
         return [
             [['key' => Chronos::now()], 'key', null, Chronos::now()],
@@ -596,9 +594,9 @@ class ConfigurationTest extends TestCase
     /**
      * Provider.
      *
-     * @return array<array<mixed>> The test data
+     * @return array The test data
      */
-    public function providerGetChronosError(): array
+    public static function providerGetChronosError(): array
     {
         return [
             [['key' => Chronos::now()], 'nope'],
@@ -629,9 +627,9 @@ class ConfigurationTest extends TestCase
     /**
      * Provider.
      *
-     * @return array<array<mixed>> The test data
+     * @return array The test data
      */
-    public function providerFindChronos(): array
+    public static function providerFindChronos(): array
     {
         return [
             [['key' => Chronos::now()], 'key', null, Chronos::now()],
@@ -647,9 +645,9 @@ class ConfigurationTest extends TestCase
     /**
      * Provider.
      *
-     * @return array<array<mixed>> The test data
+     * @return array The test data
      */
-    public function providerAll(): array
+    public static function providerAll(): array
     {
         return [
             [['key' => Chronos::now()]],
