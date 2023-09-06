@@ -1,5 +1,9 @@
 parameters:
+	level: 8
 	reportUnmatchedIgnoredErrors: false
+	paths:
+		- src
+		- tests
 	ignoreErrors:
 		- '#Cannot cast mixed to int.#'
 		- '#Cannot cast mixed to string.#'
