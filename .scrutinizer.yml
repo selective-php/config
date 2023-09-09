@@ -33,7 +33,6 @@ build:
     dependencies:
         before:
             - composer self-update
-            - composer install --no-interaction --prefer-dist --no-progress
     tests:
         before:
             -   command: composer test:coverage
