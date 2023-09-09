@@ -8,7 +8,7 @@ jobs:
     strategy:
       matrix:
         operating-system: [ ubuntu-latest ]
-        php-versions: [ '8.1', '8.2' ]
+        php-versions: [ '8.0', '8.1', '8.2' ]
     name: PHP ${{ matrix.php-versions }} Test on ${{ matrix.operating-system }}
 
     steps:
@@ -19,7 +19,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-versions }}
-          extensions: mbstring, intl, zip
+          extensions: xml, pcov, mbstring, pdo, pdo_mysql, intl, zip
           coverage: none
 
       - name: Check PHP Version
@@ -35,9 +35,7 @@ jobs:
         run: composer validate
 
       - name: Install dependencies
-        run: composer update --prefer-dist --no-progress --ignore-platform-req=php
+        run: composer install --prefer-dist --no-progress --no-suggest
 
       - name: Run test suite
         run: composer test:all
-        env:
-          PHP_CS_FIXER_IGNORE_ENV: 1
