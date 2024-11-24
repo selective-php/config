@@ -35,7 +35,7 @@ final class Configuration
      *
      * @return int The value
      */
-    public function getInt(string $key, int $default = null): int
+    public function getInt(string $key, ?int $default = null): int
     {
         $value = $this->find($key, $default);
 
@@ -54,7 +54,7 @@ final class Configuration
      *
      * @return int|null The value
      */
-    public function findInt(string $key, int $default = null)
+    public function findInt(string $key, ?int $default = null)
     {
         $value = $this->find($key, $default);
 
@@ -75,7 +75,7 @@ final class Configuration
      *
      * @return string The value
      */
-    public function getString(string $key, string $default = null): string
+    public function getString(string $key, ?string $default = null): string
     {
         $value = $this->find($key, $default);
 
@@ -94,7 +94,7 @@ final class Configuration
      *
      * @return string|null The value
      */
-    public function findString(string $key, string $default = null)
+    public function findString(string $key, ?string $default = null)
     {
         $value = $this->find($key, $default);
 
@@ -115,7 +115,7 @@ final class Configuration
      *
      * @return array<mixed> The value
      */
-    public function getArray(string $key, array $default = null): array
+    public function getArray(string $key, ?array $default = null): array
     {
         $value = $this->find($key, $default);
 
@@ -134,7 +134,7 @@ final class Configuration
      *
      * @return array<mixed>|null The value
      */
-    public function findArray(string $key, array $default = null)
+    public function findArray(string $key, ?array $default = null)
     {
         $value = $this->find($key, $default);
 
@@ -155,7 +155,7 @@ final class Configuration
      *
      * @return float The value
      */
-    public function getFloat(string $key, float $default = null): float
+    public function getFloat(string $key, ?float $default = null): float
     {
         $value = $this->find($key, $default);
 
@@ -174,7 +174,7 @@ final class Configuration
      *
      * @return float|null The value
      */
-    public function findFloat(string $key, float $default = null)
+    public function findFloat(string $key, ?float $default = null)
     {
         $value = $this->find($key, $default);
 
@@ -195,7 +195,7 @@ final class Configuration
      *
      * @return bool The value
      */
-    public function getBool(string $key, bool $default = null): bool
+    public function getBool(string $key, ?bool $default = null): bool
     {
         $value = $this->find($key, $default);
 
@@ -214,7 +214,7 @@ final class Configuration
      *
      * @return bool|null The value
      */
-    public function findBool(string $key, bool $default = null)
+    public function findBool(string $key, ?bool $default = null)
     {
         $value = $this->find($key, $default);
 
@@ -235,7 +235,7 @@ final class Configuration
      *
      * @return Chronos The value
      */
-    public function getChronos(string $key, Chronos $default = null): Chronos
+    public function getChronos(string $key, ?Chronos $default = null): Chronos
     {
         $value = $this->find($key, $default);
 
@@ -254,11 +254,11 @@ final class Configuration
      * Get value as Chronos or null.
      *
      * @param string $key The key
-     * @param Chronos $default The default value
+     * @param Chronos|null $default The default value
      *
      * @return Chronos|null The value
      */
-    public function findChronos(string $key, Chronos $default = null)
+    public function findChronos(string $key, ?Chronos $default = null)
     {
         $value = $this->find($key, $default);
 
