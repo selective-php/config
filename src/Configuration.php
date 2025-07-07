@@ -4,6 +4,7 @@ namespace Selective\Config;
 
 use Cake\Chronos\Chronos;
 use InvalidArgumentException;
+use Selective\ArrayReader\ArrayReader;
 
 /**
  * Configuration.
@@ -11,9 +12,9 @@ use InvalidArgumentException;
 final class Configuration
 {
     /**
-     * @var array<mixed> The data
+     * @var ArrayReader
      */
-    private $data;
+    private ArrayReader $arrayReader;
 
     /**
      * Constructor.
@@ -22,7 +23,7 @@ final class Configuration
      */
     public function __construct(array $data = [])
     {
-        $this->data = $data;
+        $this->arrayReader = new ArrayReader($data);
     }
 
     /**
@@ -37,13 +38,7 @@ final class Configuration
      */
     public function getInt(string $key, ?int $default = null): int
     {
-        $value = $this->find($key, $default);
-
-        if ($this->isNullOrBlank($value)) {
-            throw new InvalidArgumentException(sprintf('No value found for key "%s"', $key));
-        }
-
-        return (int)$value;
+        return $this->arrayReader->getInt($key, $default);
     }
 
     /**
@@ -56,13 +51,7 @@ final class Configuration
      */
     public function findInt(string $key, ?int $default = null)
     {
-        $value = $this->find($key, $default);
-
-        if ($this->isNullOrBlank($value)) {
-            return null;
-        }
-
-        return (int)$value;
+        return $this->arrayReader->findInt($key, $default);
     }
 
     /**
@@ -77,13 +66,7 @@ final class Configuration
      */
     public function getString(string $key, ?string $default = null): string
     {
-        $value = $this->find($key, $default);
-
-        if ($value === null) {
-            throw new InvalidArgumentException(sprintf('No value found for key "%s"', $key));
-        }
-
-        return (string)$value;
+        return $this->arrayReader->getString($key, $default);
     }
 
     /**
@@ -96,13 +79,7 @@ final class Configuration
      */
     public function findString(string $key, ?string $default = null)
     {
-        $value = $this->find($key, $default);
-
-        if ($value === null) {
-            return null;
-        }
-
-        return (string)$value;
+        return $this->arrayReader->findString($key, $default);
     }
 
     /**
@@ -117,13 +94,7 @@ final class Configuration
      */
     public function getArray(string $key, ?array $default = null): array
     {
-        $value = $this->find($key, $default);
-
-        if ($this->isNullOrBlank($value)) {
-            throw new InvalidArgumentException(sprintf('No value found for key "%s"', $key));
-        }
-
-        return (array)$value;
+        return $this->arrayReader->getArray($key, $default);
     }
 
     /**
@@ -136,13 +107,7 @@ final class Configuration
      */
     public function findArray(string $key, ?array $default = null)
     {
-        $value = $this->find($key, $default);
-
-        if ($this->isNullOrBlank($value)) {
-            return null;
-        }
-
-        return (array)$value;
+        return $this->arrayReader->findArray($key, $default);
     }
 
     /**
@@ -157,13 +122,7 @@ final class Configuration
      */
     public function getFloat(string $key, ?float $default = null): float
     {
-        $value = $this->find($key, $default);
-
-        if ($this->isNullOrBlank($value)) {
-            throw new InvalidArgumentException(sprintf('No value found for key "%s"', $key));
-        }
-
-        return (float)$value;
+        return $this->arrayReader->getFloat($key, $default);
     }
 
     /**
@@ -176,13 +135,7 @@ final class Configuration
      */
     public function findFloat(string $key, ?float $default = null)
     {
-        $value = $this->find($key, $default);
-
-        if ($this->isNullOrBlank($value)) {
-            return null;
-        }
-
-        return (float)$value;
+        return $this->arrayReader->findFloat($key, $default);
     }
 
     /**
@@ -197,13 +150,7 @@ final class Configuration
      */
     public function getBool(string $key, ?bool $default = null): bool
     {
-        $value = $this->find($key, $default);
-
-        if ($this->isNullOrBlank($value)) {
-            throw new InvalidArgumentException(sprintf('No value found for key "%s"', $key));
-        }
-
-        return (bool)$value;
+        return $this->arrayReader->getBool($key, $default);
     }
 
     /**
@@ -216,13 +163,7 @@ final class Configuration
      */
     public function findBool(string $key, ?bool $default = null)
     {
-        $value = $this->find($key, $default);
-
-        if ($this->isNullOrBlank($value)) {
-            return null;
-        }
-
-        return (bool)$value;
+        return $this->arrayReader->findBool($key, $default);
     }
 
     /**
@@ -237,17 +178,7 @@ final class Configuration
      */
     public function getChronos(string $key, ?Chronos $default = null): Chronos
     {
-        $value = $this->find($key, $default);
-
-        if ($this->isNullOrBlank($value)) {
-            throw new InvalidArgumentException(sprintf('No value found for key "%s"', $key));
-        }
-
-        if ($value instanceof Chronos) {
-            return $value;
-        }
-
-        return new Chronos($value);
+        return $this->arrayReader->getChronos($key, $default);
     }
 
     /**
@@ -260,49 +191,7 @@ final class Configuration
      */
     public function findChronos(string $key, ?Chronos $default = null)
     {
-        $value = $this->find($key, $default);
-
-        if ($this->isNullOrBlank($value)) {
-            return null;
-        }
-
-        if ($value instanceof Chronos) {
-            return $value;
-        }
-
-        return new Chronos($value);
-    }
-
-    /**
-     * Find mixed value.
-     *
-     * @param string $path The path
-     * @param mixed|null $default The default value
-     *
-     * @return mixed|null The value
-     */
-    public function find(string $path, $default = null)
-    {
-        if (array_key_exists($path, $this->data)) {
-            return $this->data[$path] ?? $default;
-        }
-
-        if (strpos($path, '.') === false) {
-            return $default;
-        }
-
-        $pathKeys = explode('.', $path);
-
-        $arrayCopyOrValue = $this->data;
-
-        foreach ($pathKeys as $pathKey) {
-            if (!isset($arrayCopyOrValue[$pathKey])) {
-                return $default;
-            }
-            $arrayCopyOrValue = $arrayCopyOrValue[$pathKey];
-        }
-
-        return $arrayCopyOrValue;
+        return $this->arrayReader->findChronos($key, $default);
     }
 
     /**
@@ -312,18 +201,6 @@ final class Configuration
      */
     public function all(): array
     {
-        return $this->data;
-    }
-
-    /**
-     * Is null or blank.
-     *
-     * @param mixed $value The value
-     *
-     * @return bool The status
-     */
-    private function isNullOrBlank($value): bool
-    {
-        return $value === null || $value === '';
+        return $this->arrayReader->all();
     }
 }
