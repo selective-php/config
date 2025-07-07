@@ -49,7 +49,7 @@ final class Configuration
      *
      * @return int|null The value
      */
-    public function findInt(string $key, ?int $default = null)
+    public function findInt(string $key, ?int $default = null): ?int
     {
         return $this->arrayReader->findInt($key, $default);
     }
@@ -77,7 +77,7 @@ final class Configuration
      *
      * @return string|null The value
      */
-    public function findString(string $key, ?string $default = null)
+    public function findString(string $key, ?string $default = null): ?string
     {
         return $this->arrayReader->findString($key, $default);
     }
@@ -105,7 +105,7 @@ final class Configuration
      *
      * @return array<mixed>|null The value
      */
-    public function findArray(string $key, ?array $default = null)
+    public function findArray(string $key, ?array $default = null): ?array
     {
         return $this->arrayReader->findArray($key, $default);
     }
@@ -133,7 +133,7 @@ final class Configuration
      *
      * @return float|null The value
      */
-    public function findFloat(string $key, ?float $default = null)
+    public function findFloat(string $key, ?float $default = null): ?float
     {
         return $this->arrayReader->findFloat($key, $default);
     }
@@ -161,7 +161,7 @@ final class Configuration
      *
      * @return bool|null The value
      */
-    public function findBool(string $key, ?bool $default = null)
+    public function findBool(string $key, ?bool $default = null): ?bool
     {
         return $this->arrayReader->findBool($key, $default);
     }
@@ -189,7 +189,7 @@ final class Configuration
      *
      * @return Chronos|null The value
      */
-    public function findChronos(string $key, ?Chronos $default = null)
+    public function findChronos(string $key, ?Chronos $default = null): ?Chronos
     {
         return $this->arrayReader->findChronos($key, $default);
     }
